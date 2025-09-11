@@ -11,7 +11,7 @@ def bruit_additif(chemin_image, niveau_bruit):
     #on ajoute le bruit à l'image
     return image + bruit
 
-image_bruitee = bruit_additif("./images_reference/image_reference1.png", 255)
+image_bruitee = bruit_additif("./images_reference/zyad.jpg", 255)
 plt.imshow(image_bruitee, cmap="gray")
 plt.show()
 
@@ -23,7 +23,7 @@ def bruit_multiplicatif(chemin_image, niveau_bruit):
     bruit = np.random.normal(0, niveau_bruit, image.shape)
     #on ajoute le bruit à l'image
     return image * (1 + bruit)
-image_bruitee = bruit_multiplicatif("./images_reference/image_reference1.png", 1)
+image_bruitee = bruit_multiplicatif("./images_reference/zyad.jpg", 1)
 plt.imshow(image_bruitee, cmap="gray")
 plt.show()
 
@@ -36,6 +36,6 @@ def bruit_salt_and_pepper(chemin_image,pourcentage_sel,pourcentage_poivre):
     image[masque_sel_and_poivre == -1] = 0
     return image
 
-image_bruitee = bruit_salt_and_pepper("./images_reference/image_reference1.png",0.10,0.10)
+image_bruitee = bruit_salt_and_pepper("./images_reference/zyad.jpg",0.10,0.10)
 plt.imshow(image_bruitee, cmap="gray")
 plt.show()
