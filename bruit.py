@@ -2,6 +2,12 @@ import numpy as np
 import skimage as sk
 import matplotlib.pyplot as plt
 
+####################################################################################################
+#
+# Fonctions génériques de bruitage
+#
+####################################################################################################
+
 #bruiter avec un bruit additif
 def bruit_additif(chemin_image, niveau_bruit):
     #on recupere l'image sous form de matrice 
@@ -11,10 +17,6 @@ def bruit_additif(chemin_image, niveau_bruit):
     #on ajoute le bruit à l'image
     image= image + bruit
     return np.clip(image, 0, 255)
-
-image_bruitee = bruit_additif("./images_reference/image_reference1.png", 100)
-plt.imshow(image_bruitee, cmap="gray")
-plt.show()
 
 #bruiter avec un bruit multiplicatif
 def bruit_multiplicatif(chemin_image, niveau_bruit):
@@ -26,10 +28,6 @@ def bruit_multiplicatif(chemin_image, niveau_bruit):
     image= image * (1 + bruit)
     return np.clip(image, 0, 255)
 
-image_bruitee = bruit_multiplicatif("./images_reference/image_reference1.png", 0.5)
-plt.imshow(image_bruitee, cmap="gray")
-plt.show()
-
  #bruiter avec un bruit sel et poivre
 def bruit_salt_and_pepper(chemin_image,pourcentage_sel,pourcentage_poivre):
     #on recupere l'image sous form de matrice
@@ -39,6 +37,20 @@ def bruit_salt_and_pepper(chemin_image,pourcentage_sel,pourcentage_poivre):
     image[masque_sel_and_poivre == 1] = 255
     image[masque_sel_and_poivre == -1] = 0
     return image
+
+####################################################################################################
+#
+# Utilisation des fonctions
+#
+####################################################################################################
+
+image_bruitee = bruit_additif("./images_reference/image_reference1.png", 100)
+plt.imshow(image_bruitee, cmap="gray")
+plt.show()
+
+image_bruitee = bruit_multiplicatif("./images_reference/image_reference1.png", 0.5)
+plt.imshow(image_bruitee, cmap="gray")
+plt.show()
 
 image_bruitee = bruit_salt_and_pepper("./images_reference/image_reference1.png",0.10,0.10)
 plt.imshow(image_bruitee, cmap="gray")

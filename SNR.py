@@ -3,6 +3,12 @@ import skimage as sk
 import matplotlib.pyplot as plt
 from skimage.util import img_as_float   
 
+####################################################################################################
+#
+# Fonction de calcul du SNR
+#
+####################################################################################################
+
 #Calcul du SNR entre une image de référence et une image bruitée
 def calcul_SNR(chemin_image_base, chemin_image_bruitee) :
     #on recupere les images sous forme de matrice
@@ -16,5 +22,12 @@ def calcul_SNR(chemin_image_base, chemin_image_bruitee) :
         return float('inf')
     #on calcule le SNR en dB
     return 10 * np.log10(p_signal / p_bruit)
+
+
+####################################################################################################
+#
+# Utilisation de la fonction
+#
+####################################################################################################
 
 print(calcul_SNR("./images_reference/image_reference1.png","./images_reference/image1_bruitee_snr_10.8656.png"))
