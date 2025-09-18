@@ -9,9 +9,10 @@ def bruit_additif(chemin_image, niveau_bruit):
     #on crée un bruit de la même taille que l'image avec un niveau de bruit donné
     bruit = np.random.normal(0, niveau_bruit, image.shape)
     #on ajoute le bruit à l'image
-    return image + bruit
+    image= image + bruit
+    return np.clip(image, 0, 255)
 
-image_bruitee = bruit_additif("./images_reference/image_reference1.png", 255)
+image_bruitee = bruit_additif("./images_reference/image_reference1.png", 100)
 plt.imshow(image_bruitee, cmap="gray")
 plt.show()
 
@@ -22,11 +23,14 @@ def bruit_multiplicatif(chemin_image, niveau_bruit):
     #on crée un bruit de la même taille que l'image avec un niveau de bruit donné
     bruit = np.random.normal(0, niveau_bruit, image.shape)
     #on ajoute le bruit à l'image
-    return image * (1 + bruit)
-image_bruitee = bruit_multiplicatif("./images_reference/image_reference1.png", 1)
+    image= image * (1 + bruit)
+    return np.clip(image, 0, 255)
+
+image_bruitee = bruit_multiplicatif("./images_reference/image_reference1.png", 0.5)
 plt.imshow(image_bruitee, cmap="gray")
 plt.show()
 
+ #bruiter avec un bruit sel et poivre
 def bruit_salt_and_pepper(chemin_image,pourcentage_sel,pourcentage_poivre):
     #on recupere l'image sous form de matrice
     image = sk.io.imread(chemin_image)
