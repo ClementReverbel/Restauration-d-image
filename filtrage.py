@@ -143,6 +143,7 @@ def filtrage_median_wrap(chemin_image_bruitee,rayon_noyau):
 #
 ####################################################################################################
 
-image_debruitee = filtrage_median_crop("./images_reference/image1_bruitee_snr_9.2885.png",5)
-plt.imshow(image_debruitee, cmap="gray")
-plt.show()
+if __name__ == '__main__':
+    image_debruitee = filtrage_median_crop("./images_reference/image1_bruitee_snr_9.2885.png",5)
+    plt.imshow(image_debruitee, cmap="gray")
+    plt.show()
