@@ -57,55 +57,131 @@ if __name__ == '__main__':
             
             #On test Crop
             #On teste median
-            image_debruitee_crop = filtrage.filtrage_median_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
-            SNR_debruitee_crop = SNR.calcul_SNR(image_reference, image_debruitee_crop)
-            resultat_median.append(SNR_debruitee_crop)
-            print("=== SNR de l'image débruitée (median crop) : ", SNR_debruitee_crop)
-            
-            #On test convolution
-            image_debruitee_extension = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
-            SNR_debruitee_extension = SNR.calcul_SNR(image_reference, image_debruitee_extension)
-            resultat_convolution.append(SNR_debruitee_extension)
-            print("=== SNR de l'image débruitée (convolution crop) : ", SNR_debruitee_extension)
+            image_debruitee = filtrage.filtrage_median_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median crop) : ", SNR_debruite)
             
             #On test extension
             #On test median
-            image_debruitee_crop = filtrage.filtrage_median_extension("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
-            SNR_debruitee_crop = SNR.calcul_SNR(image_reference, image_debruitee_crop)
-            resultat_median.append(SNR_debruitee_crop)
-            print("=== SNR de l'image débruitée (median extension) : ", SNR_debruitee_crop)
-            
-            #On test convolution
-            image_debruitee_extension = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
-            SNR_debruitee_extension = SNR.calcul_SNR(image_reference, image_debruitee_extension)
-            resultat_convolution.append(SNR_debruitee_extension)
-            print("=== SNR de l'image débruitée (convolution extension) : ", SNR_debruitee_extension)
+            image_debruitee = filtrage.filtrage_median_extension("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median extension) : ", SNR_debruite)
             
             #On test miroir
             #On test median
-            image_debruitee_miroir = filtrage.filtrage_median_miroir("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
-            SNR_debruitee_miroir = SNR.calcul_SNR(image_reference, image_debruitee_miroir)
-            resultat_median.append(SNR_debruitee_miroir)
-            print("=== SNR de l'image débruitée (median miroir) : ", SNR_debruitee_miroir)
-            
-            #On test convolution
-            image_debruitee_miroir = filtrage.filtrage_convolution_miroir("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
-            SNR_debruitee_miroir = SNR.calcul_SNR(image_reference, image_debruitee_miroir)
-            resultat_convolution.append(SNR_debruitee_miroir)
-            print("=== SNR de l'image débruitée (convolution miroir) : ", SNR_debruitee_miroir)
+            image_debruitee = filtrage.filtrage_median_miroir("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median miroir) : ", SNR_debruite)
             
             #On test wrap
             #On test median
-            image_debruitee_wrap = filtrage.filtrage_median_wrap("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
-            SNR_debruitee_wrap = SNR.calcul_SNR(image_reference, image_debruitee_wrap)
-            resultat_median.append(SNR_debruitee_wrap)
-            print("=== SNR de l'image débruitée (median wrap) : ", SNR_debruitee_wrap)
+            image_debruitee = filtrage.filtrage_median_wrap("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median wrap) : ", SNR_debruite)
             
-            #On test convolution
-            image_debruitee_wrap = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
-            SNR_debruitee_wrap = SNR.calcul_SNR(image_reference, image_debruitee_wrap)
-            resultat_convolution.append(SNR_debruitee_wrap)
-            print("=== SNR de l'image débruitée (convolution wrap) : ", SNR_debruitee_wrap)
+            #On test convolution crop rectangular
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular crop) : ", SNR_debruite)
+            
+            #On test convolution extension rectangular
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular extension) : ", SNR_debruite)
+            
+            #On test convolution miroir rectangular
+            image_debruitee = filtrage.filtrage_convolution_miroir("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular miroir) : ", SNR_debruite)
+            
+            #On test convolution wrap rectangular
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_additif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular wrap) : ", SNR_debruite)
+            
+            #On teste les filtres de convolution  
+            #On test le filtre circular
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular wrap) : ", SNR_debruite)
+            
+            #On test le filtre pyramidal
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal wrap) : ", SNR_debruite)
+            
+            #On test le filtre cone
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_additif.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone wrap) : ", SNR_debruite)
             
             #On supprime l'image créée
             os.remove("./images_reference/image1_bruitee_test_additif.png")
@@ -119,7 +195,11 @@ if __name__ == '__main__':
             if max_median > max_convolution :
                 print("Median avec la méthode ",["Crop","Extension","Miroir","Wrap"][indice_median]," avec un SNR de : ",max_median)
             else :
-                print("Convolution avec la méthode ",["Crop","Extension","Miroir","Wrap"][indice_convolution]," avec un SNR de : ",max_convolution)
+                print("Convolution avec la méthode ",["Crop rectangular","Extension rectangular","Miroir rectangular","Wrap rectangular",
+                                                      "Crop circular","Extension circular","Miroir circular","Wrap circular",
+                                                      "Crop pyramidal","Extension pyramidal","Miroir pyramidal","Wrap pyramidal",
+                                                      "Crop cone","Extension cone","Miroir cone","Wrap cone"
+                                                      ][indice_convolution]," avec un SNR de : ",max_convolution)
             resultat_median.clear()
             resultat_convolution.clear()
 
@@ -144,55 +224,131 @@ if __name__ == '__main__':
             
             #On test Crop
             #On teste median
-            image_debruitee_crop = filtrage.filtrage_median_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
-            SNR_debruitee_crop = SNR.calcul_SNR(image_reference, image_debruitee_crop)
-            resultat_median.append(SNR_debruitee_crop)
-            print("=== SNR de l'image débruitée (median crop) : ", SNR_debruitee_crop)
-            
-            #On test convolution
-            image_debruitee_extension = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
-            SNR_debruitee_extension = SNR.calcul_SNR(image_reference, image_debruitee_extension)
-            resultat_convolution.append(SNR_debruitee_extension)
-            print("=== SNR de l'image débruitée (convolution crop) : ", SNR_debruitee_extension)
+            image_debruitee = filtrage.filtrage_median_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median crop) : ", SNR_debruite)
             
             #On test extension
             #On test median
-            image_debruitee_crop = filtrage.filtrage_median_extension("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
-            SNR_debruitee_crop = SNR.calcul_SNR(image_reference, image_debruitee_crop)
-            resultat_median.append(SNR_debruitee_crop)
-            print("=== SNR de l'image débruitée (median extension) : ", SNR_debruitee_crop)
-            
-            #On test convolution
-            image_debruitee_extension = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
-            SNR_debruitee_extension = SNR.calcul_SNR(image_reference, image_debruitee_extension)
-            resultat_convolution.append(SNR_debruitee_extension)
-            print("=== SNR de l'image débruitée (convolution extension) : ", SNR_debruitee_extension)
+            image_debruitee = filtrage.filtrage_median_extension("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median extension) : ", SNR_debruite)
             
             #On test miroir
             #On test median
-            image_debruitee_miroir = filtrage.filtrage_median_miroir("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
-            SNR_debruitee_miroir = SNR.calcul_SNR(image_reference, image_debruitee_miroir)
-            resultat_median.append(SNR_debruitee_miroir)
-            print("=== SNR de l'image débruitée (median miroir) : ", SNR_debruitee_miroir)
-            
-            #On test convolution
-            image_debruitee_miroir = filtrage.filtrage_convolution_miroir("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
-            SNR_debruitee_miroir = SNR.calcul_SNR(image_reference, image_debruitee_miroir)
-            resultat_convolution.append(SNR_debruitee_miroir)
-            print("=== SNR de l'image débruitée (convolution miroir) : ", SNR_debruitee_miroir)
+            image_debruitee = filtrage.filtrage_median_miroir("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median miroir) : ", SNR_debruite)
             
             #On test wrap
             #On test median
-            image_debruitee_wrap = filtrage.filtrage_median_wrap("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
-            SNR_debruitee_wrap = SNR.calcul_SNR(image_reference, image_debruitee_wrap)
-            resultat_median.append(SNR_debruitee_wrap)
-            print("=== SNR de l'image débruitée (median wrap) : ", SNR_debruitee_wrap)
+            image_debruitee = filtrage.filtrage_median_wrap("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median wrap) : ", SNR_debruite)
             
-            #On test convolution
-            image_debruitee_wrap = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
-            SNR_debruitee_wrap = SNR.calcul_SNR(image_reference, image_debruitee_wrap)
-            resultat_convolution.append(SNR_debruitee_wrap)
-            print("=== SNR de l'image débruitée (convolution wrap) : ", SNR_debruitee_wrap)
+            #On test convolution rectangular crop 
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular crop) : ", SNR_debruite)
+            
+            #On test convolution rectangular extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular extension) : ", SNR_debruite)
+            
+            
+            #On test convolution rectangular miroir
+            image_debruitee = filtrage.filtrage_convolution_miroir("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular miroir) : ", SNR_debruite)
+           
+            #On test convolution rectangular wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular wrap) : ", SNR_debruite)
+            
+            #On test le filtre circular
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular wrap) : ", SNR_debruite)
+            
+            #On test le filtre pyramidal
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal wrap) : ", SNR_debruite)
+            
+            #On test le filtre cone
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_multiplicatif.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone wrap) : ", SNR_debruite)
             
             #On supprime l'image créée
             os.remove("./images_reference/image1_bruitee_test_multiplicatif.png")
@@ -206,7 +362,11 @@ if __name__ == '__main__':
             if max_median > max_convolution :
                 print("Median avec la méthode ",["Crop","Extension","Miroir","Wrap"][indice_median]," avec un SNR de : ",max_median)
             else :
-                print("Convolution avec la méthode ",["Crop","Extension","Miroir","Wrap"][indice_convolution]," avec un SNR de : ",max_convolution)
+                print("Convolution avec la méthode ",["Crop rectangular","Extension rectangular","Miroir rectangular","Wrap rectangular",
+                                                      "Crop circular","Extension circular","Miroir circular","Wrap circular",
+                                                      "Crop pyramidal","Extension pyramidal","Miroir pyramidal","Wrap pyramidal",
+                                                      "Crop cone","Extension cone","Miroir cone","Wrap cone"
+                                                      ][indice_convolution]," avec un SNR de : ",max_convolution)
             resultat_median.clear()
             resultat_convolution.clear()
 
@@ -231,55 +391,130 @@ if __name__ == '__main__':
             
             #On test Crop
             #On teste median
-            image_debruitee_crop = filtrage.filtrage_median_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
-            SNR_debruitee_crop = SNR.calcul_SNR(image_reference, image_debruitee_crop)
-            resultat_median.append(SNR_debruitee_crop)
-            print("=== SNR de l'image débruitée (median crop) : ", SNR_debruitee_crop)
-            
-            #On test convolution
-            image_debruitee_extension = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
-            SNR_debruitee_extension = SNR.calcul_SNR(image_reference, image_debruitee_extension)
-            resultat_convolution.append(SNR_debruitee_extension)
-            print("=== SNR de l'image débruitée (convolution crop) : ", SNR_debruitee_extension)
+            image_debruitee = filtrage.filtrage_median_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median crop) : ", SNR_debruite)
             
             #On test extension
             #On test median
-            image_debruitee_crop = filtrage.filtrage_median_extension("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
-            SNR_debruitee_crop = SNR.calcul_SNR(image_reference, image_debruitee_crop)
-            resultat_median.append(SNR_debruitee_crop)
-            print("=== SNR de l'image débruitée (median extension) : ", SNR_debruitee_crop)
-            
-            #On test convolution
-            image_debruitee_extension = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
-            SNR_debruitee_extension = SNR.calcul_SNR(image_reference, image_debruitee_extension)
-            resultat_convolution.append(SNR_debruitee_extension)
-            print("=== SNR de l'image débruitée (convolution extension) : ", SNR_debruitee_extension)
+            image_debruitee = filtrage.filtrage_median_extension("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median extension) : ", SNR_debruite)
             
             #On test miroir
             #On test median
-            image_debruitee_miroir = filtrage.filtrage_median_miroir("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
-            SNR_debruitee_miroir = SNR.calcul_SNR(image_reference, image_debruitee_miroir)
-            resultat_median.append(SNR_debruitee_miroir)
-            print("=== SNR de l'image débruitée (median miroir) : ", SNR_debruitee_miroir)
-            
-            #On test convolution
-            image_debruitee_miroir = filtrage.filtrage_convolution_miroir("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
-            SNR_debruitee_miroir = SNR.calcul_SNR(image_reference, image_debruitee_miroir)
-            resultat_convolution.append(SNR_debruitee_miroir)
-            print("=== SNR de l'image débruitée (convolution miroir) : ", SNR_debruitee_miroir)
+            image_debruitee = filtrage.filtrage_median_miroir("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median miroir) : ", SNR_debruite)
 
             #On test wrap
             #On test median
-            image_debruitee_wrap = filtrage.filtrage_median_wrap("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
-            SNR_debruitee_wrap = SNR.calcul_SNR(image_reference, image_debruitee_wrap)
-            resultat_median.append(SNR_debruitee_wrap)
-            print("=== SNR de l'image débruitée (median wrap) : ", SNR_debruitee_wrap)
+            image_debruitee = filtrage.filtrage_median_wrap("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_median.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (median wrap) : ", SNR_debruite)
             
-            #On test convolution
-            image_debruitee_wrap = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
-            SNR_debruitee_wrap = SNR.calcul_SNR(image_reference, image_debruitee_wrap)
-            resultat_convolution.append(SNR_debruitee_wrap)
-            print("=== SNR de l'image débruitée (convolution wrap) : ", SNR_debruitee_wrap)
+             #On test convolution rectangular crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular crop) : ", SNR_debruite)
+            
+            #On test convolution rectangular extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular extension) : ", SNR_debruite)
+            
+            #On test convolution rectangular miroir
+            image_debruitee = filtrage.filtrage_convolution_miroir("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular miroir) : ", SNR_debruite)
+            
+            #On test convolution rectangular wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau)
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution rectangular wrap) : ", SNR_debruite)
+            
+            #On test le filtre circular
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"circular")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution circular wrap) : ", SNR_debruite)
+            
+            #On test le filtre pyramidal
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"pyramidal")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution pyramidal wrap) : ", SNR_debruite)
+            
+            #On test le filtre cone
+            #Crop
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone crop) : ", SNR_debruite)
+            
+            #Extension
+            image_debruitee = filtrage.filtrage_convolution_extension("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone extension) : ", SNR_debruite)
+            
+            #Miroir
+            image_debruitee = filtrage.filtrage_convolution_crop("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone miroir) : ", SNR_debruite)
+            
+            #Wrap
+            image_debruitee = filtrage.filtrage_convolution_wrap("./images_reference/image1_bruitee_test_salt_pepper.png",rayon_noyau,"cone")
+            SNR_debruite = SNR.calcul_SNR(image_reference, image_debruitee)
+            resultat_convolution.append(SNR_debruite)
+            print("=== SNR de l'image débruitée (convolution cone wrap) : ", SNR_debruite)
 
             #On supprime l'image créée
             os.remove("./images_reference/image1_bruitee_test_salt_pepper.png")
@@ -293,6 +528,10 @@ if __name__ == '__main__':
             if max_median > max_convolution :
                 print("Median avec la méthode ",["Crop","Extension","Miroir","Wrap"][indice_median]," avec un SNR de : ",max_median)
             else :
-                print("Convolution avec la méthode ",["Crop","Extension","Miroir","Wrap"][indice_convolution]," avec un SNR de : ",max_convolution)
+                print("Convolution avec la méthode ",["Crop rectangular","Extension rectangular","Miroir rectangular","Wrap rectangular",
+                                                      "Crop circular","Extension circular","Miroir circular","Wrap circular",
+                                                      "Crop pyramidal","Extension pyramidal","Miroir pyramidal","Wrap pyramidal",
+                                                      "Crop cone","Extension cone","Miroir cone","Wrap cone"
+                                                      ][indice_convolution]," avec un SNR de : ",max_convolution)
 
     deinit() # pour arrêter colorama
