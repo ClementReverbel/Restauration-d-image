@@ -26,10 +26,8 @@ def filtrage_convolution(image_bruitee, rayon_noyau):
             #On ne traite que les pixels pour lesquels le noyau est entièrement dans l'image
             if (i>=rayon_noyau and j>=rayon_noyau) and (i<nb_ligne_img-rayon_noyau and j<nb_colonne_img-rayon_noyau):
                 #On parcourt chaque pixel du noyau
-                for k in range(diametre_noyau):
-                    for m in range(diametre_noyau):
-                        #On remplit le noyau avec les valeurs de l'image
-                        noyau[k][m]=image_bruitee[i-rayon_noyau+k][j-rayon_noyau+m]
+                noyau = image_bruitee[i-rayon_noyau : i+rayon_noyau+1,
+                                    j-rayon_noyau : j+rayon_noyau+1]
                 # On calcule la moyenne du noyau
                 nouvelle_image[i][j]=np.sum(noyau)/noyau.size
     return nouvelle_image
@@ -52,10 +50,8 @@ def filtrage_median(image_bruitee, rayon_noyau):
             #On ne traite que les pixels pour lesquels le noyau est entièrement dans l'image
             if (i>=rayon_noyau and j>=rayon_noyau) and (i<nb_ligne_img-rayon_noyau and j<nb_colonne_img-rayon_noyau):
                 #On parcourt chaque pixel du noyau
-                for k in range(diametre_noyau):
-                    for m in range(diametre_noyau):
-                        #On remplit le noyau avec les valeurs de l'image
-                        noyau[k][m]=image_bruitee[i-rayon_noyau+k][j-rayon_noyau+m]
+                noyau = image_bruitee[i-rayon_noyau : i+rayon_noyau+1,
+                                    j-rayon_noyau : j+rayon_noyau+1]
                 # On calcule la médiane du noyau
                 nouvelle_image[i][j]=np.median(noyau)
     return nouvelle_image
@@ -144,6 +140,6 @@ def filtrage_median_wrap(chemin_image_bruitee,rayon_noyau):
 ####################################################################################################
 
 if __name__ == '__main__':
-    image_debruitee = filtrage_median_crop("./images_reference/image1_bruitee_snr_9.2885.png",5)
+    image_debruitee = filtrage_convolution_extension("./images_reference/image1_bruitee_snr_9.2885.png",2)
     plt.imshow(image_debruitee, cmap="gray")
     plt.show()
