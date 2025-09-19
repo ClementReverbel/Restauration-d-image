@@ -16,7 +16,7 @@ def bruit_additif(chemin_image, niveau_bruit):
     bruit = np.random.normal(0, niveau_bruit, image.shape)
     #on ajoute le bruit à l'image
     image= image + bruit
-    return np.clip(image, 0, 255)
+    return np.clip(image, 0, 255).astype(np.uint8)
 
 #bruiter avec un bruit multiplicatif
 def bruit_multiplicatif(chemin_image, niveau_bruit):
@@ -26,7 +26,7 @@ def bruit_multiplicatif(chemin_image, niveau_bruit):
     bruit = np.random.normal(0, niveau_bruit, image.shape)
     #on ajoute le bruit à l'image
     image= image * (1 + bruit)
-    return np.clip(image, 0, 255)
+    return np.clip(image, 0, 255).astype(np.uint8)
 
  #bruiter avec un bruit sel et poivre
 def bruit_salt_and_pepper(chemin_image,pourcentage_sel,pourcentage_poivre):
