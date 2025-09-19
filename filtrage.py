@@ -4,22 +4,60 @@ import matplotlib.pyplot as plt
 
 ####################################################################################################
 #
+# Fonctions de création de matrice de filtres
+#
+###################################################################################################
+
+def ligne_pyramide(i, rayon):
+    # partie croissante
+    croissant = [j * i for j in range(1, rayon)]
+    # partie décroissante
+    decroissant = [j * i for j in range(rayon, 0, -1)]
+    return croissant + decroissant
+
+def matrice_pyramide(rayon):
+    masque_noyau = [ligne_pyramide(i, rayon) for i in range(1, rayon)]
+    masque_noyau += [ligne_pyramide(i, rayon) for i in range(rayon, 0, -1)]
+    return masque_noyau
+
+
+####################################################################################################
+#
 # Fonctions génériques de filtrage (médian et par convolution)
 #
 ####################################################################################################
 
 #Fonction prennant en paramètre une image bruitée et un rayon de noyau, et renvoyant l'image filtrée par convolution
-def filtrage_convolution(image_bruitee, rayon_noyau):
+def filtrage_convolution(image_bruitee, rayon_noyau, nom_filtre="rectangular"):        
     #Si le rayon du noyau est nul, on ne fait rien
     if rayon_noyau==0:
         return image_bruitee
     else :
         diametre_noyau=2*rayon_noyau
+        
+    #Vérification du nom du filtre
+    if not nom_filtre in ["rectangular","circular","pyramidal","cone"]:
+        raise ValueError("Le nom du filtre doit être 'rectangular', 'circular', 'pyramidal' ou 'cone'")
+
+    masque_noyau=[]
+    #Selon le type de filtre, on crée le masque du noyau
+    match nom_filtre:
+        case "rectangular":
+            masque_noyau=np.array([[1 for n in range(diametre_noyau+1)] for c in range(diametre_noyau+1)])
+        case "circular":
+            
+            pass
+        case "pyramidal":
+            masque_noyau=np.array(matrice_pyramide(rayon_noyau+1))
+            print(matrice_pyramide(rayon_noyau+1))
+        case "cone":
+            pass
     #On initialise les variables
     nb_ligne_img=image_bruitee.shape[0]
     nb_colonne_img=image_bruitee.shape[1]
     nouvelle_image=image_bruitee.copy()
-    noyau=np.array([[0 for n in range(diametre_noyau)] for c in range(diametre_noyau)])
+    noyau=np.array([])
+    
     #On parcourt l'image
     for i in range(nb_ligne_img):
         for j in range(nb_colonne_img):
@@ -140,6 +178,7 @@ def filtrage_median_wrap(chemin_image_bruitee,rayon_noyau):
 ####################################################################################################
 
 if __name__ == '__main__':
-    image_debruitee = filtrage_convolution_extension("./images_reference/image1_bruitee_snr_9.2885.png",2)
-    plt.imshow(image_debruitee, cmap="gray")
-    plt.show()
+    #image_debruitee = filtrage_convolution_extension("./images_reference/image1_bruitee_snr_9.2885.png",2)
+    #plt.imshow(image_debruitee, cmap="gray")
+    #plt.show()
+    filtrage_convolution("./images_reference/image1_bruitee_snr_9.2885.png",1,"pyramidal")
