@@ -538,3 +538,69 @@ if __name__ == '__main__':
     os.remove("./images_reference/image_bruitee_test_additif.png")
     
     deinit() # pour arrêter colorama
+
+def plot_three_noise_3d(kernel_sizes, noise_levels, methods, noisy_snr, filtered_snr, output_path=None):
+    """
+    Trace 3 surfaces/ensembles de courbes 3D, un subplot par type de bruit.
+
+    Paramètres :
+      - kernel_sizes : liste des tailles de noyau (ex. [3,5,7])
+      - noise_levels : liste des niveaux de bruit (ex. ['faible','moyen','élevé'])
+      - methods : liste des noms de méthodes (ex. ['median_crop','median_extension',...])
+      - noisy_snr : dict bruit_type -> 1D array shape (len(noise_levels),)  (SNR de l'image bruitée par niveau)
+      - filtered_snr : dict bruit_type -> dict method -> 2D array shape (len(noise_levels), len(kernel_sizes))
+                       (SNR après filtrage pour chaque niveau et taille de noyau)
+      - output_path : chemin de sauvegarde de la figure (optionnel)
+    """
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+
+    bruit_types = list(filtered_snr.keys())  # ex. ['additif','multiplicatif','sel_poivre']
+    fig = plt.figure(figsize=(18, 5))
+    colors = plt.cm.tab10.colors
+
+    for idx, bruit in enumerate(bruit_types):
+        ax = fig.add_subplot(1, 3, idx+1, projection='3d')
+        ax.set_title(f'Gain de SNR — bruit: {bruit}')
+        ax.set_xlabel('Taille du noyau (px)')
+        ax.set_ylabel('Niveau de bruit')
+        ax.set_zlabel('Gain SNR (dB)')
+
+        # grille X (kernel), Y (noise index)
+        X = np.array(kernel_sizes)
+        Y_vals = np.arange(len(noise_levels))
+
+        noisy = np.asarray(noisy_snr[bruit])              # (N_levels,)
+        # filtered_snr[bruit][method] -> shape (N_levels, N_kernels)
+        for m_i, method in enumerate(methods):
+            Z = np.asarray(filtered_snr[bruit][method])   # shape (N_levels, N_kernels)
+            # gain = filtered - noisy (broadcast)
+            gain = Z - noisy[:, None]                     # shape (N_levels, N_kernels)
+            color = colors[m_i % len(colors)]
+            label_plotted = False
+            # pour chaque niveau de bruit, tracer la ligne le long des tailles de noyau
+            for yi, y in enumerate(Y_vals):
+                z_line = gain[yi, :]
+                # n'afficher le label qu'une fois par méthode
+                lbl = method if not label_plotted else None
+                ax.plot(X, np.full_like(X, y), z_line, color=color, marker='o', label=lbl)
+                label_plotted = True
+
+        # remplacer ticks Y par labels lisibles
+        ax.set_yticks(Y_vals)
+        ax.set_yticklabels(noise_levels)
+        ax.view_init(elev=30, azim=-60)
+        ax.grid(True)
+
+    # légende globale (méthodes)
+    # crée un axe invisible pour placer la légende commune
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, loc='upper center', ncol=min(len(methods), 6))
+    plt.tight_layout(rect=[0,0,1,0.95])
+
+    if output_path:
+        plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    else:
+        plt.show()
+    plt.close(fig)
