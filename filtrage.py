@@ -77,17 +77,24 @@ def filtrage_convolution(image_bruitee, rayon_noyau, nom_filtre="rectangular"):
     nb_colonne_img=image_bruitee.shape[1]
     nouvelle_image=image_bruitee.copy()
     noyau=np.array([])
+    
+    
 
     #On parcourt l'image
-    for i in range(nb_ligne_img):
-        for j in range(nb_colonne_img):
-            #On ne traite que les pixels pour lesquels le noyau est entièrement dans l'image
-            if (i>=rayon_noyau and j>=rayon_noyau) and (i<nb_ligne_img-rayon_noyau and j<nb_colonne_img-rayon_noyau):
-                #On parcourt chaque pixel du noyau
-                noyau = image_bruitee[i-rayon_noyau : i+rayon_noyau+1,
-                                    j-rayon_noyau : j+rayon_noyau+1]
-                # On calcule la moyenne du noyau
-                nouvelle_image[i][j]=np.sum(noyau*masque_noyau)/np.sum(masque_noyau)
+    if image_bruitee.ndim == 3:
+        nb_canaux = image_bruitee.shape[2]
+        for c in range(nb_canaux):
+            for i in range(rayon_noyau, nb_ligne_img - rayon_noyau):
+                for j in range(rayon_noyau, nb_colonne_img - rayon_noyau):
+                    noyau = image_bruitee[i-rayon_noyau:i+rayon_noyau+1,
+                                          j-rayon_noyau:j+rayon_noyau+1, c]
+                    nouvelle_image[i, j, c] = np.sum(noyau * masque_noyau) / np.sum(masque_noyau)
+    else:
+        for i in range(rayon_noyau, nb_ligne_img - rayon_noyau):
+            for j in range(rayon_noyau, nb_colonne_img - rayon_noyau):
+                noyau = image_bruitee[i-rayon_noyau:i+rayon_noyau+1,
+                                      j-rayon_noyau:j+rayon_noyau+1]
+                nouvelle_image[i, j] = np.sum(noyau * masque_noyau) / np.sum(masque_noyau)
     return nouvelle_image
 
 #Fonction prennant en paramètre une image bruitée et un rayon de noyau, et renvoyant l'image filtrée par médiane
@@ -103,15 +110,22 @@ def filtrage_median(image_bruitee, rayon_noyau):
     nouvelle_image=image_bruitee.copy()
     noyau=np.array([[0 for n in range(diametre_noyau)] for c in range(diametre_noyau)])
     #On parcourt l'image
-    for i in range(nb_ligne_img):
-        for j in range(nb_colonne_img):
-            #On ne traite que les pixels pour lesquels le noyau est entièrement dans l'image
-            if (i>=rayon_noyau and j>=rayon_noyau) and (i<nb_ligne_img-rayon_noyau and j<nb_colonne_img-rayon_noyau):
-                #On parcourt chaque pixel du noyau
-                noyau = image_bruitee[i-rayon_noyau : i+rayon_noyau+1,
-                                    j-rayon_noyau : j+rayon_noyau+1]
-                # On calcule la médiane du noyau
-                nouvelle_image[i][j]=np.median(noyau)
+    if image_bruitee.ndim == 3:
+        nb_canaux = image_bruitee.shape[2]
+        nouvelle_image = image_bruitee.copy()
+        for c in range(nb_canaux):
+            for i in range(rayon_noyau, nb_ligne_img - rayon_noyau):
+                for j in range(rayon_noyau, nb_colonne_img - rayon_noyau):
+                    noyau = image_bruitee[i-rayon_noyau:i+rayon_noyau+1,
+                                          j-rayon_noyau:j+rayon_noyau+1, c]
+                    nouvelle_image[i, j, c] = np.median(noyau)
+    else:
+        nouvelle_image = image_bruitee.copy()
+        for i in range(rayon_noyau, nb_ligne_img - rayon_noyau):
+            for j in range(rayon_noyau, nb_colonne_img - rayon_noyau):
+                noyau = image_bruitee[i-rayon_noyau:i+rayon_noyau+1,
+                                      j-rayon_noyau:j+rayon_noyau+1]
+                nouvelle_image[i, j] = np.median(noyau)
     return nouvelle_image
 
 
@@ -130,7 +144,12 @@ def filtrage_convolution_crop(chemin_image_bruitee,rayon_noyau,nom_filtre="recta
 def filtrage_convolution_extension(chemin_image_bruitee,rayon_noyau,nom_filtre="rectangular"):
     image_bruitee = sk.io.imread(chemin_image_bruitee)
     # On étend l'image en utilisant la méthode 'edge' (pixels de bord répétés)
-    image_bruitee = np.pad(image_bruitee, pad_width=rayon_noyau, mode='edge')
+    # pad_width est une tuple pour appliquer le padding différemment par dimension
+    if image_bruitee.ndim == 3:
+        pad_width = ((rayon_noyau, rayon_noyau), (rayon_noyau, rayon_noyau), (0, 0))
+    else:
+        pad_width = rayon_noyau
+    image_bruitee = np.pad(image_bruitee, pad_width=pad_width, mode='edge')
     image_bruitee = filtrage_convolution(image_bruitee, rayon_noyau,nom_filtre)
     image_bruitee = image_bruitee[rayon_noyau:-rayon_noyau, rayon_noyau:-rayon_noyau]
     return image_bruitee
@@ -139,7 +158,11 @@ def filtrage_convolution_extension(chemin_image_bruitee,rayon_noyau,nom_filtre="
 def filtrage_convolution_miroir(chemin_image_bruitee,rayon_noyau,nom_filtre="rectangular"):
     image_bruitee = sk.io.imread(chemin_image_bruitee)
     # On étend l'image en utilisant la méthode 'symmetric' (pixel extérieur répétant le pixel intérieur)
-    image_bruitee = np.pad(image_bruitee, pad_width=rayon_noyau, mode='symmetric')
+    if image_bruitee.ndim == 3:
+        pad_width = ((rayon_noyau, rayon_noyau), (rayon_noyau, rayon_noyau), (0, 0))
+    else:
+        pad_width = rayon_noyau
+    image_bruitee = np.pad(image_bruitee, pad_width=pad_width, mode='symmetric')
     image_bruitee = filtrage_convolution(image_bruitee, rayon_noyau,nom_filtre)
     image_bruitee = image_bruitee[rayon_noyau:-rayon_noyau, rayon_noyau:-rayon_noyau]
     return image_bruitee
@@ -148,7 +171,11 @@ def filtrage_convolution_miroir(chemin_image_bruitee,rayon_noyau,nom_filtre="rec
 def filtrage_convolution_wrap(chemin_image_bruitee,rayon_noyau,nom_filtre="rectangular"):
     image_bruitee = sk.io.imread(chemin_image_bruitee)
     # On étend l'image en utilisant la méthode 'wrap' (pixels du bord opposé)
-    image_bruitee = np.pad(image_bruitee, pad_width=rayon_noyau, mode='wrap')
+    if image_bruitee.ndim == 3:
+        pad_width = ((rayon_noyau, rayon_noyau), (rayon_noyau, rayon_noyau), (0, 0))
+    else:
+        pad_width = rayon_noyau
+    image_bruitee = np.pad(image_bruitee, pad_width=pad_width, mode='wrap')
     image_bruitee = filtrage_convolution(image_bruitee, rayon_noyau,nom_filtre)
     image_bruitee = image_bruitee[rayon_noyau:-rayon_noyau, rayon_noyau:-rayon_noyau]
     return image_bruitee
@@ -168,7 +195,11 @@ def filtrage_median_crop(chemin_image_bruitee,rayon_noyau):
 def filtrage_median_extension(chemin_image_bruitee,rayon_noyau):
     image_bruitee = sk.io.imread(chemin_image_bruitee)
     # On étend l'image en utilisant la méthode 'edge' (pixels de bord répétés)
-    image_bruitee = np.pad(image_bruitee, pad_width=rayon_noyau, mode='edge')
+    if image_bruitee.ndim == 3:
+        pad_width = ((rayon_noyau, rayon_noyau), (rayon_noyau, rayon_noyau), (0, 0))
+    else:
+        pad_width = rayon_noyau
+    image_bruitee = np.pad(image_bruitee, pad_width=pad_width, mode='edge')
     image_bruitee = filtrage_median(image_bruitee, rayon_noyau)
     image_bruitee = image_bruitee[rayon_noyau:-rayon_noyau, rayon_noyau:-rayon_noyau]
     return image_bruitee
@@ -177,7 +208,11 @@ def filtrage_median_extension(chemin_image_bruitee,rayon_noyau):
 def filtrage_median_miroir(chemin_image_bruitee,rayon_noyau):
     image_bruitee = sk.io.imread(chemin_image_bruitee)
     # On étend l'image en utilisant la méthode 'symmetric' (pixel extérieur répétant le pixel intérieur)
-    image_bruitee = np.pad(image_bruitee, pad_width=rayon_noyau, mode='symmetric')
+    if image_bruitee.ndim == 3:
+        pad_width = ((rayon_noyau, rayon_noyau), (rayon_noyau, rayon_noyau), (0, 0))
+    else:
+        pad_width = rayon_noyau
+    image_bruitee = np.pad(image_bruitee, pad_width=pad_width, mode='symmetric')
     image_bruitee = filtrage_median(image_bruitee, rayon_noyau)
     image_bruitee = image_bruitee[rayon_noyau:-rayon_noyau, rayon_noyau:-rayon_noyau]
     return image_bruitee
@@ -186,7 +221,11 @@ def filtrage_median_miroir(chemin_image_bruitee,rayon_noyau):
 def filtrage_median_wrap(chemin_image_bruitee,rayon_noyau):
     image_bruitee = sk.io.imread(chemin_image_bruitee)
     # On étend l'image en utilisant la méthode 'wrap' (pixels du bord opposé)
-    image_bruitee = np.pad(image_bruitee, pad_width=rayon_noyau, mode='wrap')
+    if image_bruitee.ndim == 3:
+        pad_width = ((rayon_noyau, rayon_noyau), (rayon_noyau, rayon_noyau), (0, 0))
+    else:
+        pad_width = rayon_noyau
+    image_bruitee = np.pad(image_bruitee, pad_width=pad_width, mode='wrap')
     image_bruitee = filtrage_median(image_bruitee, rayon_noyau)
     image_bruitee = image_bruitee[rayon_noyau:-rayon_noyau, rayon_noyau:-rayon_noyau]
     return image_bruitee
@@ -198,6 +237,6 @@ def filtrage_median_wrap(chemin_image_bruitee,rayon_noyau):
 ####################################################################################################
 
 if __name__ == '__main__':
-    image_debruitee = filtrage_convolution_extension("./images_reference/image1_bruitee_snr_9.2885.png",2)
-    plt.imshow(image_debruitee, cmap="gray")
+    image_debruitee = filtrage_convolution_extension("./images_reference/image2_reference.png",2)
+    plt.imshow(image_debruitee)#, cmap="gray")
     plt.show()

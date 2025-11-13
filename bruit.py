@@ -46,14 +46,14 @@ def bruit_salt_and_pepper(chemin_image,pourcentage_sel,pourcentage_poivre):
 
 if __name__ == '__main__':
     # Exemples d'utilisation — protégés pour qu'ils ne s'exécutent pas à l'import
-    image_bruitee = bruit_additif("./images_reference/image_reference1.png", 100)
+    image_bruitee = bruit_additif("./images_reference/image3_reference.png", 100)
     plt.imshow(image_bruitee, cmap="gray")
     plt.show()
 
-    image_bruitee = bruit_multiplicatif("./images_reference/image_reference1.png", 0.5)
+    image_bruitee = bruit_multiplicatif("./images_reference/image3_reference.png", 0.5)
     plt.imshow(image_bruitee, cmap="gray")
     plt.show()
 
-    image_bruitee = bruit_salt_and_pepper("./images_reference/image_reference1.png",0.10,0.10)
+    image_bruitee = bruit_salt_and_pepper("./images_reference/image3_reference.png",0.10,0.10)
     plt.imshow(image_bruitee, cmap="gray")
     plt.show()
