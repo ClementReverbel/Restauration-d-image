@@ -237,6 +237,6 @@ def filtrage_median_wrap(chemin_image_bruitee,rayon_noyau):
 ####################################################################################################
 
 if __name__ == '__main__':
-    image_debruitee = filtrage_convolution_extension("./images_reference/image2_reference.png",2)
-    plt.imshow(image_debruitee)#, cmap="gray")
+    image_debruitee = filtrage_convolution_extension("./images_reference/image3_reference.png",2)
+    plt.imshow(image_debruitee, cmap="gray")
     plt.show()
